@@ -1,6 +1,9 @@
 # Drawable
 This is an android application for making drawings using your fingers.
 
+#Technology used
+Java
+
 #Features
 Create new drawing<br />
 Choose brush size<br>
