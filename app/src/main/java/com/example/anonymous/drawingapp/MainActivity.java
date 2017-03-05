@@ -99,8 +99,8 @@ public class MainActivity extends Activity implements OnClickListener {
                     brushDialog.dismiss();
                 }
             });
-            brushDialog.show();
             drawView.setErase(false);
+            brushDialog.show();
         }
         else if(view.getId()==R.id.erase_btn){
             //switch to erase - choose size
