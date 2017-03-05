@@ -55,6 +55,11 @@ public class MainActivity extends Activity implements OnClickListener {
             drawView.setErase(false);
             drawView.setBrushSize(drawView.getLastBrushSize());
         }
+        else{
+            //Change to brush
+            drawView.setErase(false);
+            drawView.setBrushSize(drawView.getLastBrushSize());
+        }
 
 
     }
