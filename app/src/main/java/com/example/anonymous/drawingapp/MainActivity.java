@@ -3,6 +3,7 @@ package com.example.anonymous.drawingapp;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,16 +19,33 @@ public class MainActivity extends Activity implements OnClickListener {
 
     private DrawingView drawView;
     private float smallBrush, mediumBrush, largeBrush;
-    private ImageButton currPaint, drawBtn,eraseBtn,newBtn,saveBtn;
+    private ImageButton currPaint, drawBtn,eraseBtn,newBtn,colorbtn,saveBtn;
+    View colorBrown,colorRed,colorOrange,colorYellow,colorGreen,colorBlue,colorDarkblue,colorPurple,colorPink,colorCyan,colorLightdark,colorBlack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawView = (DrawingView)findViewById(R.id.drawing);
-        LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
-        currPaint = (ImageButton)paintLayout.getChildAt(0);
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+//        Log.v("Initial", String.valueOf(currPaint));
+//        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+//        LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
+        currPaint =(ImageButton)findViewById(R.id.brown_color);
+//        Log.v("Log", String.valueOf(currPaint));
+//        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+//        colorBrown=findViewById (R.id.brown_color);
+//        Log.v("Log", String.valueOf(colorBrown));
+//        colorRed=findViewById(R.id.red_color);
+//        colorGreen=findViewById(R.id.green_color);
+//        colorYellow=findViewById(R.id.yellow_color);
+//        colorOrange=findViewById(R.id.orange_color);
+//        colorBlue=findViewById(R.id.blue_color);
+//        colorDarkblue=findViewById(R.id.darkblue_color);
+//        colorPurple=findViewById(R.id.purple_color);
+//        colorPink=findViewById(R.id.pink_color);
+//        colorCyan=findViewById(R.id.cyan_color);
+//        colorLightdark=findViewById(R.id.lightdark_color);
+//        colorBlack=findViewById(R.id.black_color);
         smallBrush = getResources().getInteger(R.integer.small_size);
         mediumBrush = getResources().getInteger(R.integer.medium_size);
         largeBrush = getResources().getInteger(R.integer.large_size);
@@ -38,34 +56,38 @@ public class MainActivity extends Activity implements OnClickListener {
         eraseBtn.setOnClickListener(this);
         newBtn = (ImageButton)findViewById(R.id.new_btn);
         newBtn.setOnClickListener(this);
+        colorbtn=(ImageButton) findViewById(R.id.color_btn);
+        colorbtn.setOnClickListener(this);
         saveBtn = (ImageButton)findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
     }
 
-    public void paintClicked(View view){
+    public void paintClicked(ImageButton imgbutton){
         //use chosen color
-        if(view!=currPaint) {
+        if(imgbutton!=currPaint) {
             //update color
-            ImageButton imgView = (ImageButton) view;
-            String color = view.getTag().toString();
+//            Log.v("Log","If statement");
+            //ImageButton imgView = (ImageButton) view;
+            String color = imgbutton.getTag().toString();
             drawView.setColor(color);
-            imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-            currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-            currPaint=(ImageButton)view;
+//            imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+//            currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+            currPaint=imgbutton;
             drawView.setErase(false);
             drawView.setBrushSize(drawView.getLastBrushSize());
         }
         else{
             //Change to brush
+//            Log.v("Log","else statement");
+//            Log.v("Log", String.valueOf(currPaint));
+//            Log.v("Log", String.valueOf(imgbutton));
             drawView.setErase(false);
             drawView.setBrushSize(drawView.getLastBrushSize());
         }
-
-
     }
 
     public void onClick(View view){
-    //respond to clicks
+        //respond to clicks
         if(view.getId()==R.id.draw_btn){
             //draw button clicked
             final Dialog brushDialog = new Dialog(this);
@@ -101,6 +123,7 @@ public class MainActivity extends Activity implements OnClickListener {
             });
             drawView.setErase(false);
             brushDialog.show();
+
         }
         else if(view.getId()==R.id.erase_btn){
             //switch to erase - choose size
@@ -111,6 +134,7 @@ public class MainActivity extends Activity implements OnClickListener {
             smallBtn.setOnClickListener(new OnClickListener(){
                 @Override
                 public void onClick(View v) {
+
                     drawView.setErase(true);
                     drawView.setBrushSize(smallBrush);
                     brushDialog.dismiss();
@@ -134,8 +158,113 @@ public class MainActivity extends Activity implements OnClickListener {
                     brushDialog.dismiss();
                 }
             });
+
             brushDialog.show();
-            drawView.setErase(false);
+        }
+        else if(view.getId()==R.id.color_btn){
+            //Color Button Clicked
+            final Dialog brushDialog = new Dialog(this);
+            brushDialog.setTitle("Choose Color:");
+            brushDialog.setContentView(R.layout.color_chooser);
+            final ImageButton browncolor = (ImageButton)brushDialog.findViewById(R.id.brown_color);
+            System.out.println("Log"+browncolor);
+            browncolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(browncolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton redcolor = (ImageButton)brushDialog.findViewById(R.id.red_color);
+            redcolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(redcolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton orangecolor = (ImageButton)brushDialog.findViewById(R.id.orange_color);
+            orangecolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(orangecolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton yellowcolor = (ImageButton)brushDialog.findViewById(R.id.yellow_color);
+            yellowcolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(yellowcolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton greencolor = (ImageButton)brushDialog.findViewById(R.id.green_color);
+            greencolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(greencolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton bluecolor = (ImageButton)brushDialog.findViewById(R.id.blue_color);
+            bluecolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(bluecolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton darkbluecolor = (ImageButton)brushDialog.findViewById(R.id.darkblue_color);
+            darkbluecolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(darkbluecolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton purplecolor = (ImageButton)brushDialog.findViewById(R.id.purple_color);
+            purplecolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(purplecolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton pinkcolor = (ImageButton)brushDialog.findViewById(R.id.pink_color);
+            pinkcolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(pinkcolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton cyancolor = (ImageButton)brushDialog.findViewById(R.id.cyan_color);
+            cyancolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(cyancolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton lightdarkcolor = (ImageButton)brushDialog.findViewById(R.id.lightdark_color);
+            lightdarkcolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(lightdarkcolor);
+                    brushDialog.dismiss();
+                }
+            });
+            final ImageButton blackcolor = (ImageButton)brushDialog.findViewById(R.id.black_color);
+            blackcolor.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    paintClicked(blackcolor);
+                    brushDialog.dismiss();
+                }
+            });
+            brushDialog.show();
+
         }
         else if(view.getId()==R.id.new_btn){
             //new button
