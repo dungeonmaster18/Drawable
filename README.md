@@ -13,3 +13,7 @@ Save the drawing into gallery<br />
 
 # Reference
 https://code.tutsplus.com/tutorials/android-sdk-create-a-drawing-app-interface-creation--mobile-19021
+
+# Licence
+
+This project is licensed under the Apache 2.0 License - see the [LICENSE.md](LICENSE.md) file for details
