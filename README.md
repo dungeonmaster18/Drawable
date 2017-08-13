@@ -1,4 +1,4 @@
-https://travis-ci.org/dungeonmaster18/Drawable.svg?branch=master
+[![Build Status](https://travis-ci.org/dungeonmaster18/Drawable.svg?branch=master)](https://travis-ci.org/dungeonmaster18/Drawable)
 
 # Drawable
 This is an android application for making drawings using your fingers.
