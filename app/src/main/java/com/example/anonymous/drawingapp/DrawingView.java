@@ -17,6 +17,8 @@ import android.util.TypedValue;
  * Created by anonymous on 2/23/17.
  */
 
+//testing the app
+
 public class DrawingView extends View {
 
     //drawing path
